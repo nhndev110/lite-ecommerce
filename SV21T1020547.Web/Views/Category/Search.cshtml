@@ -1,0 +1,48 @@
+﻿@model SV21T1020547.Web.Models.CategorySearchResult
+@{
+    Layout = null;
+}
+<p style="margin: 10px 0;">
+    Có <b>@Model.RowCount</b> loại hàng trong tổng số <b>@Model.PageCount</b> trang
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="bg-primary">
+            <tr>
+                <th>Tên loại hàng</th>
+                <th>Mô tả</th>
+                <th style="width: 80px;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Data.Count() > 0)
+            {
+                @foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Description</td>
+                        <td class="text-right">
+                            <a href="~/Category/Edit/@item.CategoryID" class="btn btn-xs btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="~/Category/Delete/@item.CategoryID" class="btn btn-xs btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="3">Không tìm thấy dữ liệu</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    await Html.RenderPartialAsync("_Pagination");
+}

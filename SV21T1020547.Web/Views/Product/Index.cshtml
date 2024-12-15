@@ -1,0 +1,115 @@
+﻿@model ProductSearchInput
+@{
+    ViewBag.Title = "Quản lý Mặt hàng";
+}
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Lỗi !</strong> @TempData.Peek("error")
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <!-- Form đầu vào tìm kiếm -->
+        <form action="~/Product/Search" method="get" id="frmSearchInput">
+
+            <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <label>Loại hàng:</label>
+                    <select class="custom-select" name="@nameof(Model.CategoryID)">
+                        <option value="">-- Chọn loại hàng --</option>
+                        @foreach (var item in CommonDataService.ListOfCategories())
+                        {
+                            if (item.CategoryID == Model.CategoryID)
+                            {
+                                <option selected value="@item.CategoryID">@item.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryID">@item.CategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label>Nhà cung cấp:</label>
+                    <select class="custom-select" name="@nameof(Model.SupplierID)">
+                        <option value="">-- Chọn nhà cung cấp --</option>
+                        @foreach (var item in CommonDataService.ListOfSuppliers())
+                        {
+                            if (item.SupplierID == Model.SupplierID)
+                            {
+                                <option selected value="@item.SupplierID">@item.SupplierName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.SupplierID">@item.SupplierName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <label>Giá từ:</label>
+                    <input type="text"
+                           class="form-control number-separator text-left tooltip-price"
+                           name="@nameof(Model.MinPrice)"
+                           value="@Model.MinPrice"
+                           autocomplete="off"
+                           min="0" />
+                </div>
+                <div class="col-sm-1">
+                    <label>đến:</label>
+                    <input type="text"
+                           class="form-control number-separator text-left tooltip-price"
+                           name="@nameof(Model.MaxPrice)"
+                           value="@Model.MaxPrice"
+                           autocomplete="off"
+                           min="0" />
+                </div>
+                <div class="col-sm-4 d-flex align-items-end">
+                    <div class="flex-grow-1">
+                        <label>Tên mặt hàng cần tìm:</label>
+                        <div class="input-group">
+                            <input name="@nameof(Model.SearchValue)"
+                                   value="@Model.SearchValue"
+                                   type="search"
+                                   class="form-control"
+                                   placeholder="Nhập mặt hàng hàng cần tìm"
+                                   autofocus />
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/Product/Create" class="btn btn-primary" style="margin-left:5px">
+                        <i class="fa fa-plus"></i>
+                        <span>Bổ sung</span>
+                    </a>
+                </div>
+            </div>
+        </form>
+
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            doSearch(@Model.Page);
+            $("#frmSearchInput").submit((ev) => {
+                ev.preventDefault();
+                doSearch(1);
+            });
+        });
+    </script>
+}

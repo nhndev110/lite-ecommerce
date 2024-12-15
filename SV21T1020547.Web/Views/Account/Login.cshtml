@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NHN Shop - Đăng nhập</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/themes/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/themes/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/themes/dist/css/adminlte.min.css">
+    <style>
+        .alert-danger {
+            color: #d32535 !important;
+            background-color: rgba(255, 169, 178, 0.2);
+        }
+
+        .toggle-show-password {
+            cursor: pointer;
+            height: 38px;
+            width: 48px;
+        }
+
+            .toggle-show-password::before {
+                content: "\f070"; /* fa-eye-slash */
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+            }
+
+            .toggle-show-password.show-password::before {
+                content: "\f06e"; /* fa-eye */
+            }
+    </style>
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a class="h1"><b>NHN</b> Shop</a>
+            </div>
+            <div class="card-body">
+                @if (ViewData.ModelState["Error"] == null)
+                {
+                    <p class="login-box-msg">Đăng nhập hệ thống</p>
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Html.ValidationMessage("Error")
+                    </div>
+                }
+
+                <form action="~/Account/Login" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <div class="input-group mb-3">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Nhập tên đăng nhập"
+                                   name="username"
+                                   id="username"
+                                   value="@ViewBag.UserName" autofocus />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <div class="input-group mb-3">
+                            <input type="password"
+                                   class="form-control"
+                                   placeholder="Nhập mật khẩu"
+                                   name="password"
+                                   id="password" />
+                            <div class="input-group-append">
+                                <button class="btn btn-default toggle-show-password" type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/themes/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/themes/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/themes/dist/js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            $(".toggle-show-password").click(function () {
+                const passwordField = $(this).closest('.input-group').find(".form-control");
+
+                const isText = passwordField.attr("type") === "text";
+                passwordField.attr("type", isText ? "password" : "text");
+                $(this).toggleClass("show-password", !isText);
+            });
+        });
+    </script>
+</body>
+</html>
+

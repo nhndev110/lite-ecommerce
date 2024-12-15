@@ -1,0 +1,48 @@
+﻿@model SV21T1020547.Web.Models.PaginationSearchInput
+@{
+    ViewBag.Title = "Quản lý Người giao hàng";
+}
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <form id="frmSearchInput" action="~/Shipper/Search" method="get">
+
+            <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
+
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <div class="input-group">
+                        <input class="form-control"
+                               placeholder="Nhập tên người giao hàng cần tìm"
+                               autofocus
+                               type="search"
+                               name="@nameof(Model.SearchValue)"
+                               value="@Model.SearchValue" />
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="~/Shipper/Create" class="btn btn-primary" style="margin-left: 5px;">
+                    <i class="fa fa-plus"></i>
+                    <span>Bổ sung</span>
+                </a>
+            </div>
+        </form>
+        
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            doSearch(@Model.Page);
+            $("#frmSearchInput").submit((ev) => {
+                ev.preventDefault();
+                doSearch(1);
+            });
+        });
+    </script>
+}

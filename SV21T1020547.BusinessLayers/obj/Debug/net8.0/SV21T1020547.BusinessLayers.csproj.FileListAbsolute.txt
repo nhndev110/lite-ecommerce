@@ -1,0 +1,17 @@
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.BusinessLayers.deps.json
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.BusinessLayers.dll
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.BusinessLayers.pdb
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.DataLayers.dll
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.DomainModels.dll
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.DataLayers.pdb
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\bin\Debug\net8.0\SV21T1020547.DomainModels.pdb
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.csproj.AssemblyReference.cache
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.GeneratedMSBuildEditorConfig.editorconfig
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.AssemblyInfoInputs.cache
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.AssemblyInfo.cs
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.csproj.CoreCompileInputs.cache
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T102.E292DA7A.Up2Date
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.dll
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\refint\SV21T1020547.BusinessLayers.dll
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\SV21T1020547.BusinessLayers.pdb
+D:\workspace\TaiLieuCacMonHoc\LapTrinhUngDungWeb\practice-demo\SV21T1020547\SV21T1020547.BusinessLayers\obj\Debug\net8.0\ref\SV21T1020547.BusinessLayers.dll

@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<div class="text-center">
+    <h2 style="font-size: 2.5rem;">
+        Chào mừng
+        <span class="text-primary" style="font-weight: 500;">@User.FindFirst("DisplayName")?.Value</span>
+        đã quay trở lại !🎉
+    </h2>
+</div>

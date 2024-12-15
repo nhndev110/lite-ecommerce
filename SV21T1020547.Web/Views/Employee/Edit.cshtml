@@ -1,0 +1,115 @@
+﻿@model Employee
+@{
+}
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" action="~/Employee/Save">
+            <input type="hidden" name="@nameof(Model.EmployeeID)" value="@Model.EmployeeID" />
+            <input type="hidden" name="@nameof(Model.Password)" value="@Model.Password" />
+
+            <div class="form-group row align-items-center">
+                <label class="col-label-form text-right col-sm-2 mb-0">Họ và tên:</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Nhập họ và tên"
+                           name="@nameof(Model.FullName)"
+                           value="@Model.FullName"
+                           autofocus />
+                    @Html.ValidationMessage(nameof(Model.FullName))
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label for="Birthdate" class="col-label-form text-right col-sm-2 mb-0">Ngày sinh:</label>
+                <div class="col-sm-10">
+                    <input type="hidden" name="@nameof(Model.BirthDate)" value="@Model.BirthDate" />
+                    <input type="text"
+                           placeholder="Nhập ngày sinh"
+                           id="Birthdate"
+                           class="form-control datemask datetime-picker"
+                           data-inputmask-alias="datetime"
+                           data-inputmask-inputformat="dd/mm/yyyy"
+                           name="_@nameof(Model.BirthDate)"
+                           value="@Model.BirthDate?.ToString("dd/MM/yyyy", new System.Globalization.CultureInfo("en-GB"))" />
+                    @Html.ValidationMessage(nameof(Model.BirthDate))
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label class="col-label-form text-right col-sm-2 mb-0">Địa chỉ:</label>
+                <div class="col-sm-10">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Nhập địa chỉ"
+                           name="@nameof(Model.Address)"
+                           value="@Model.Address" />
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label class="col-label-form text-right col-sm-2 mb-0">Điện thoại:</label>
+                <div class="col-sm-10">
+                    <input type="tel"
+                           placeholder="Nhập số điện thoại"
+                           class="form-control"
+                           name="@nameof(Model.Phone)"
+                           value="@Model.Phone" />
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label class="col-label-form text-right col-sm-2 mb-0">Email:</label>
+                <div class="col-sm-10">
+                    <input type="email"
+                           class="form-control"
+                           placeholder="Nhập địa chỉ email"
+                           name="@nameof(Model.Email)"
+                           value="@Model.Email" />
+                    @Html.ValidationMessage(nameof(Model.Email))
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-lg-2 col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="@nameof(Model.IsWorking)"
+                               value="true"
+                               id="is-working" @(@Model.IsWorking ? "checked" : "") />
+                        <label for="is-working" class="form-check-label">Nhân viên đang làm việc</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row align-items-center">
+                <label class="col-label-form text-right col-sm-2 mb-0">Ảnh cá nhân:</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <label class="custom-file-label">@(string.IsNullOrWhiteSpace(Model.Photo) ? "Chọn ảnh" : Model.Photo)</label>
+                        <input type="hidden" name="@nameof(Model.Photo)" value="@Model.Photo" />
+                        <input type="file"
+                               class="custom-file-input"
+                               name="uploadPhoto"
+                               accept="image/*"
+                               onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-lg-2 col-sm-10">
+                    <img id="Photo"
+                         src="@StaticResources.GetUserAvatarPath(Model.Photo)"
+                         class="img-bordered img-circle @(Model.IsWorking ? "border-primary" : "")"
+                         style="width:200px; height: 200px; object-fit: cover;" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-lg-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        <span>Lưu dữ liệu</span>
+                    </button>
+                    <a href="~/Employee" class="btn btn-default">
+                        Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

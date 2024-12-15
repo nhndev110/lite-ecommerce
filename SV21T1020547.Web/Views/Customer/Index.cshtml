@@ -1,0 +1,48 @@
+﻿@model PaginationSearchInput
+@{
+    ViewBag.Title = "Quản lý Khách hàng";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <form id="frmSearchInput" action="~/Customer/Search" method="get">
+
+            <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
+
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <div class="input-group">
+                        <input class="form-control"
+                               type="search"
+                               placeholder="Nhập tên khách hàng cần tìm"
+                               autofocus
+                               name="@nameof(Model.SearchValue)"
+                               value="@Model.SearchValue" />
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="~/Customer/Create" class="btn btn-primary" style="margin-left: 5px;">
+                    <i class="fa fa-plus"></i> Bổ sung
+                </a>
+            </div>
+        </form>
+
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            doSearch(@Model.Page);
+            $("#frmSearchInput").submit((ev) => {
+                ev.preventDefault();
+                doSearch(1);
+            });
+        });
+    </script>
+}

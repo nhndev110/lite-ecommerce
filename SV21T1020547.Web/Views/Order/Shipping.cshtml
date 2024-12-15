@@ -1,0 +1,71 @@
+﻿@model Order
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <form id="frmShipping" action="~/Order/Shipping/@Model.OrderID" method="post">
+            <div class="modal-header">
+                <h4 class="modal-title">Chuyển giao hàng cho đơn hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Người giao hàng:</label>
+                    <select class="custom-select" name="@nameof(Model.ShipperID)">
+                        <option value="0">-- Chọn người giao hàng ---</option>
+                        @foreach (var item in CommonDataService.ListOfShippers())
+                        {
+                            <option value="@item.ShipperID">@item.ShipperName</option>
+                        }
+                    </select>
+                </div>
+
+                <div id="errorShipping"
+                     class="alert alert-danger alert-dismissible"
+                     role="alert"
+                     style="display: none;">
+                    <i class="icon fas fa-exclamation-triangle"></i>
+                    <span></span>
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    <span class="ml-1">Cập nhật</span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Bỏ qua
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#frmShipping").submit(function (ev) {
+            ev.preventDefault();
+
+            const _this = $(this);
+
+            $("#errorShipping").hide();
+
+            $.ajax({
+                url: _this.prop("action"),
+                type: _this.prop("method"),
+                data: _this.serializeArray(),
+            })
+                .done(function (data) {
+                    window.location.reload();
+                })
+                .fail(function (xhr) {
+                    $("#errorShipping span").text(xhr.responseJSON.message);
+                    $("#errorShipping").fadeIn();
+                });
+        });
+    });
+</script>

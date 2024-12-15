@@ -1,0 +1,60 @@
+﻿<nav class="main-header navbar navbar-expand navbar-white navbar-light py-1">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                <i class="fas fa-bars"></i>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        @{
+            var userData = User.GetUserData();
+            if (userData != null)
+            {
+                <li class="dropdown user user-menu border d-flex align-items-center rounded"
+                    style="background-color: rgba(0, 0, 0, 0.03); transition: 0.3s;">
+                    <div class="dropdown-toggle d-flex align-items-center py-1 px-2" data-toggle="dropdown" style="cursor: pointer;">
+                        <img src="@StaticResources.GetUserAvatarPath(userData.Photo)"
+                             class="user-image mt-0"
+                             style="width: 32px; height: auto;"
+                             alt="@userData.DisplayName">
+                        <div class="px-2">
+                            <span class="d-inline m-0 font-weight-bolder"
+                               style="font-size: 15px; line-height: 1.2;">
+                                @userData.DisplayName
+                            </span>
+                            <span class="d-block text-secondary m-0 text-uppercase"
+                                  style="font-size: 12px; line-height: 1.2;">
+                                @string.Join(" - ", @userData.Roles)
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="dropdown-menu rounded-lg animate__animated animate__fadeIn animate__faster">
+                        <li class="user-header">
+                            <img src="@StaticResources.GetUserAvatarPath(userData.Photo)"
+                                 class="img-circle p-1 img-bordered border-primary"
+                                 alt="@userData.DisplayName">
+                            <p class="mt-2 mb-0"
+                               style="line-height: 1rem; font-size: 1.225rem;">
+                                @userData.DisplayName
+                            </p>
+                            <span class="text-secondary m-0"
+                                  style="font-size: 0.925rem;">
+                                @userData.UserName
+                            </span>
+                        </li>
+                        <li class="user-footer rounded-lg">
+                            <div class="float-left">
+                                <a href="~/Account/ChangePassword" class="btn btn-default">Đổi mật khẩu</a>
+                            </div>
+                            <div class="float-right">
+                                <a href="~/Account/Logout" class="btn btn-default">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</nav>

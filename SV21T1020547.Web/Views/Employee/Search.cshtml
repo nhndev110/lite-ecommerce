@@ -1,0 +1,65 @@
+﻿@model SV21T1020547.Web.Models.EmployeeSearchResult
+@{
+    Layout = null;
+}
+<p style="margin-top:10px">
+    Có <strong>@Model.RowCount</strong> nhân viên trong tổng số <strong>@Model.PageCount</strong> trang.
+</p>
+<div class="row">
+    @if (Model.Data.Count() > 0)
+    {
+        @foreach (var item in Model.Data)
+        {
+            <div class="col-12 col-md-6 col-xl-4">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title m-0 font-weight-bold">@item.FullName</h3>
+                        <div class="card-tools">
+                            <a class="btn-card-tool mr-2" href="~/Employee/Edit/@item.EmployeeID">
+                                <i class="fa fa-edit text-primary"></i>
+                            </a>
+                            <a class="btn-card-tool" href="~/Employee/Delete/@item.EmployeeID">
+                                <i class="fa fa-trash text-danger"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 text-center text-lg-start mb-3 mb-lg-0">
+                                <img class="img-bordered img-circle @(item.IsWorking ? "border-primary" : "")"
+                                     style="object-fit: cover; height: 100px; width: 100px; object-position: center;"
+                                     src="@StaticResources.GetUserAvatarPath(item.Photo)">
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <i class="fa fa-birthday-cake"></i>
+                                        <span class="ml-1">@item.BirthDate?.ToString("dd/MM/yyyy")</span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fa fa-phone"></i>
+                                        <span class="ml-1">@item.Phone</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-start" style="height: 70px;">
+                                        <i class="mt-1 fa fa-envelope"></i>
+                                        <span class="ml-2 text-break">@item.Email</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col">
+            <p class="text-center">Không tìm thấy dữ liệu</p>
+        </div>
+    }
+</div>
+
+@{
+    await Html.RenderPartialAsync("_Pagination");
+}

@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NHN SHOP | @ViewBag.Title</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Others -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="~/themes/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/themes/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/themes/plugins/select2/css/select2.css">
+    <link rel="stylesheet" href="~/themes/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/themes/plugins/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/themes/plugins/bootstrap-datepicker/bootstrap-datetimepicker-standalone.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/themes/dist/css/adminlte.min.css">
+    <style>
+        .field-validation-error {
+            display: inline-block;
+            color: red;
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .bootstrap-datetimepicker-widget table td.day {
+            height: 32px !important;
+        }
+
+        .toast {
+            min-width: 300px;
+        }
+
+        .alert-danger {
+            color: #d32535;
+            background-color: rgba(255, 169, 178, 0.2);
+        }
+
+        .dropdown.user.user-menu:hover {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .toggle-show-password {
+            cursor: pointer;
+            height: 38px;
+            width: 48px;
+        }
+        
+        .toggle-show-password::before {
+            content: "\f070"; /* fa-eye-slash */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        .toggle-show-password.show-password::before {
+            content: "\f06e"; /* fa-eye */
+        }
+    </style>
+    @RenderSection("styles", false)
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+    <div class="wrapper">
+        @{
+            await Html.RenderPartialAsync("_Header");
+            await Html.RenderPartialAsync("_SideBar");
+        }
+        <div class="content-wrapper pb-3">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@ViewBag.title</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        @{
+            await Html.RenderPartialAsync("_ControlSideBar");
+            await Html.RenderPartialAsync("_Footer");
+        }
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/themes/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/themes/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Others -->
+    <script src="~/themes/plugins/popper/umd/popper.min.js"></script>
+    <script src="~/themes/plugins/moment/moment-with-locales.js"></script>
+    <script src="~/themes/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/themes/plugins/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/themes/plugins/select2/js/select2.js"></script>
+    <script src="~/themes/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <script src="~/themes/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/themes/dist/js/adminlte.min.js"></script>
+    <script>
+        $(function () {
+            $('.daterange-picker').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear',
+                    format: 'DD/MM/YYYY',
+                }
+            });
+            $('.daterange-picker').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            });
+            $('.daterange-picker').on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+
+            $('.datetime-picker').datetimepicker({
+                locale: 'vi',
+                format: 'L',
+                icons: {
+                    time: 'fas fa-clock',
+                    date: 'fas fa-calendar-alt',
+                    up: 'fas fa-chevron-up',
+                    down: 'fas fa-chevron-down',
+                    previous: 'fas fa-chevron-left',
+                    next: 'fas fa-chevron-right',
+                    today: 'fas fa-crosshairs',
+                    clear: 'fas fa-trash-alt',
+                    close: 'fas fa-times'
+                }
+            });
+
+            $('.select2').select2({ width: "100%", theme: "bootstrap4" })
+                .on('select2:open', function (ev) {
+                    document.querySelector('.select2-search__field').focus();
+                });
+
+            $('.pagination .disabled a, .pagination .active a').on('click', function (e) {
+                e.preventDefault();
+            });
+            
+            bsCustomFileInput.init();
+
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.tooltip-price').on('keyup focus hover', function (ev) {
+                $(this).attr('title', $(this).val() || 0).tooltip('dispose');
+                $(this).tooltip('show');
+            });
+
+            $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': '__/__/____' });
+            $('.number-separator').inputmask({
+                alias: "numeric",
+                groupSeparator: ",",       // Dấu phẩy phân cách phần nghìn
+                autoGroup: true,           // Tự động thêm dấu phân cách
+                digits: 0,                 // Không có chữ số thập phân
+                removeMaskOnSubmit: true   // Loại bỏ ký tự phân cách phần nghìn khi submit form
+            });
+            $('[data-mask]').inputmask();
+        });
+
+        function doSearch(page) {
+            const frmSearchInput = $("#frmSearchInput");
+
+            $("#searchResult").html(`
+                <div class="d-flex align-items-center justify-content-center m-5">
+                        <span class="spinner-grow text-primary mr-3" role="status"></span>
+                        <span class="text-primary">Loading...</span>
+                </div>
+            `);
+
+            let searchCondition = frmSearchInput.serializeArray();
+            searchCondition.push({ name: "page", value: page });
+
+            const action = frmSearchInput.prop("action");
+            const method = frmSearchInput.prop("method");
+
+            setTimeout(() => {
+                $.ajax({
+                    url: action,
+                    type: method,
+                    data: searchCondition,
+                })
+                    .done((data) => $("#searchResult").html(data));
+            }, 200);
+        }
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿@{
+    string UrlAction = Url.Action() ?? "";
+}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/" class="brand-link text-center">
+        <span class="brand-text font-weight-bold">NHN SHOP</span>
+    </a>
+
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="~/" class="nav-link @(UrlAction == "/" ? "active" : "")">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Trang Chủ</p>
+                    </a>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Quản lý dữ liệu
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="~/Supplier"
+                               class="nav-link @(UrlAction.StartsWith("/Supplier") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Nhà cung cấp</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Customer" class="nav-link @(UrlAction.StartsWith("/Customer") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Khách hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Shipper" class="nav-link @(UrlAction.StartsWith("/Shipper") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Người giao hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Employee" class="nav-link @(UrlAction.StartsWith("/Employee") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Nhân viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Category" class="nav-link @(UrlAction.StartsWith("/Category") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Loại hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Product" class="nav-link @(UrlAction.StartsWith("/Product") ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Mặt hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>
+                            Quản lý bán hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="~/Order" class="nav-link @(UrlAction.StartsWith("/Order") && UrlAction != "/Order/Create" ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh mục đơn hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/Order/Create" class="nav-link @(UrlAction == "/Order/Create" ? "active" : "")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lập đơn hàng</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>

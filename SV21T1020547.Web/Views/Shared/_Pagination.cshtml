@@ -1,0 +1,28 @@
+﻿@if (Model?.PageCount > 1)
+{
+    <div class="d-flex justify-content-center">
+        <nav aria-label="navigation">
+            <ul class="pagination flex-wrap justify-content-center">
+                @for (int p = 1; p <= Model.PageCount; p++)
+                {
+                    @if (p == Model.Page)
+                    {
+                        <li class="page-item active">
+                            <a href="javascript:;" class="page-link">@p</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a href="javascript:;"
+                               class="page-link"
+                               onclick="doSearch(@p);">
+                               @p
+                             </a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+}

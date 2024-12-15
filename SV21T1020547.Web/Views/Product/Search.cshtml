@@ -1,0 +1,59 @@
+﻿@model ProductSearchResult
+@{
+    Layout = null;
+}
+
+<p class="my-3">
+    Có <strong>@Model.RowCount</strong> mặt hàng trong tổng số <strong>@Model.PageCount</strong> trang
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="bg-primary">
+                <th style="width:80px">Ảnh</th>
+                <th>Tên mặt hàng</th>
+                <th>Đơn vị tính</th>
+                <th>Giá</th>
+                <th style="width:80px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Data.Count() > 0)
+            {
+                @foreach (var product in Model.Data)
+                {
+                    <tr>
+                        <td>
+                            <img src="@StaticResources.GetImagePath(product.Photo, "products")"
+                                 class="w-100"
+                                 alt="@product.ProductName" />
+                        </td>
+                        <td>@product.ProductName</td>
+                        <td>@product.Unit</td>
+                        <td>@product.Price.ToString("N0")</td>
+                        <td class="text-right">
+                            <a href="~/Product/Edit/@product.ProductID" class="btn btn-xs btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="~/Product/Delete/@product.ProductID" class="btn btn-xs btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center" colspan="7">Không tìm thấy dữ liệu</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    await Html.RenderPartialAsync("_Pagination");
+}
+

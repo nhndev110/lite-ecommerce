@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "NHN Shop - Mua hàng online giá tốt, hàng chuẩn, ship nhanh";
+    var categories = CommonDataService.ListOfCategories();
+}
+
+@foreach (var category in categories)
+{
+    <section class="mb-3">
+        <h2 class="fw-medium mb-3 fs-4">
+            <a class="text-reset text-decoration-none text-uppercase" href="#">@category.CategoryName</a>
+        </h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            @{
+                var products = ProductDataService.ListProducts(categoryID: category.CategoryID);
+            }
+            @foreach (var item in products)
+            {
+                <form action="~/Cart/AddToCart" method="post" class="frmAddToCart">
+
+                    <input type="hidden" name="ProductID" value="@item.ProductID" />
+                    <input type="hidden" name="ProductName" value="@item.ProductName" />
+                    <input type="hidden" name="Photo" value="@item.Photo" />
+                    <input type="hidden" name="Unit" value="@item.Unit" />
+                    <input type="hidden" name="SalePrice" value="@item.Price" />
+                    <input type="hidden" name="Quantity" value="1" />
+
+                    <div class="col">
+                        <div class="card border-0 shadow">
+                            <img src="https://placehold.co/600x400" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title fs-6 multiline-truncate" style="height: 60px;">@item.ProductName</h5>
+                                <p class="card-text fw-medium">@item.Price.ToString("N0")&#8363;</p>
+                                <div class="d-flex">
+                                    <a href="#" class="btn btn-outline-dark flex-grow-1 me-2 rounded-1">
+                                        <i class="fa-regular fa-eye"></i>
+                                        <span>Xem chi tiết</span>
+                                    </a>
+                                    <button class="btn btn-dark rounded-1" type="submit">
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script>
+        $(".frmAddToCart").submit(function (ev) {
+            ev.preventDefault();
+
+            $.ajax({
+                url: $(this).prop("action"),
+                type: $(this).prop("method"),
+                data: $(this).serializeArray(),
+            })
+                .done(function () {
+
+                });
+        });
+    </script>
+}

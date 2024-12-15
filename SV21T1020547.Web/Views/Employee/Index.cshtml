@@ -1,0 +1,51 @@
+﻿@model SV21T1020547.Web.Models.PaginationSearchInput
+@{
+    ViewBag.Title = "Quản lý Nhân viên";
+}
+
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <!-- Form nhập đầu vào tìm kiếm-->
+        <form id="frmSearchInput" action="~/Employee/Search" method="get">
+
+            <input type="hidden" name="@nameof(Model.PageSize)" value="@Model.PageSize" />
+
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <div class="input-group">
+                        <input type="search"
+                               class="form-control"
+                               placeholder="Nhập tên nhân viên cần tìm"
+                               autofocus
+                               name="@nameof(Model.SearchValue)"
+                               value="@Model.SearchValue" />
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="~/Employee/Create" class="btn btn-primary" style="margin-left:5px">
+                    <i class="fa fa-plus"></i>
+                    <span>Bổ sung</span>
+                </a>
+            </div>
+        </form>
+
+        <!-- Hiển thị dữ liệu -->
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            doSearch(@Model.Page);
+            $("#frmSearchInput").submit((ev) => {
+                ev.preventDefault();
+                doSearch(1);
+            });
+        });
+    </script>
+}

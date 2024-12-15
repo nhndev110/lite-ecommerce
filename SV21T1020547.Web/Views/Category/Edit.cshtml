@@ -1,0 +1,29 @@
+﻿@model Category
+@{
+}
+<div class="card card-primary card-outline">
+    <div class="card-body">
+        <form action="~/Category/Save" method="post">
+            <input type="hidden" name="@nameof(Model.CategoryID)" value="@Model.CategoryID" />
+            <div class="form-group">
+                <label>Tên loại hàng:</label>
+                <input class="form-control" name="@nameof(Model.CategoryName)" value="@Model.CategoryName" />
+                @Html.ValidationMessage(nameof(Model.CategoryName))
+            </div>
+
+            <div class="form-group">
+                <label>Mô tả:</label>
+                <textarea name="@nameof(Model.Description)" class="form-control" rows="3">@Model.Description</textarea>
+                @Html.ValidationMessage(nameof(Model.Description))
+            </div>
+
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    <span>Lưu dữ liệu</span>
+                </button>
+                <a href="~/Category" class="btn btn-default">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+﻿@model OrderDetail
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <form id="frmUpdateDetail" action="~/Order/UpdateDetail/@Model.OrderID" method="post">
+            <div class="modal-header">
+                <h4 class="modal-title">Cập nhật chi tiết đơn hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 32px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" name="@nameof(Model.ProductID)" value="@Model.ProductID" />
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-label-form col-sm-3">Tên mặt hàng:</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.ProductName</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-label-form col-sm-3">Đơn vị tính:</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">@Model.Unit</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-label-form col-sm-3">Số lượng:</label>
+                    <div class="col-sm-9">
+                        <input type="number"
+                               class="form-control"
+                               min="1"
+                               name="@nameof(Model.Quantity)"
+                               value="@Model.Quantity" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-label-form col-sm-3">Giá bán:</label>
+                    <div class="col-sm-9">
+                        <input id="@nameof(Model.SalePrice)"
+                               type="text"
+                               class="form-control number-separator text-left"
+                               min="1"
+                               value="@Model.SalePrice" />
+                    </div>
+                </div>
+
+                <div id="errorUpdateDetail"
+                     class="alert alert-danger alert-dismissible"
+                     role="alert"
+                     style="display: none;">
+                    <i class="icon fas fa-exclamation-triangle"></i>
+                    <span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    <span>Cập nhật</span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span>Bỏ qua</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.number-separator').inputmask({
+            alias: "numeric",
+            groupSeparator: ",",       // Dấu phẩy phân cách phần nghìn
+            autoGroup: true,           // Tự động thêm dấu phân cách
+            digits: 0,                 // Không có chữ số thập phân
+            removeMaskOnSubmit: true   // Loại bỏ ký tự phân cách phần nghìn khi submit form
+        });
+
+        $("#frmUpdateDetail").submit(function (ev) {
+            ev.preventDefault();
+
+            const _this = $(this);
+
+            $("#errorUpdateDetail").hide();
+
+            const salePrice = $("#@nameof(Model.SalePrice)").inputmask('unmaskedvalue');
+
+            let data = _this.serializeArray();
+            data.push({ name: "@nameof(Model.SalePrice)", value: salePrice });
+
+            $.ajax({
+                url: _this.prop("action"),
+                type: _this.prop("method"),
+                data: data,
+            })
+                .done(function (data) {
+                    window.location.reload();
+                })
+                .fail(function (xhr) {
+                    $("#errorUpdateDetail span").text(xhr.responseJSON.message);
+                    $("#errorUpdateDetail").fadeIn();
+                });
+        });
+    });
+
+</script>
